@@ -1,2 +1,2 @@
-web: gunicorn project.wsgi --log-file -
+web: gunicorn stocks.wsgi --log-file -
 release: bash release.sh
