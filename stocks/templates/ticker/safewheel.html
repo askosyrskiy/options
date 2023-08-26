@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3>Ticker {{ ticker }}</h3>
+<h4>Last price: ${{ last_price|floatformat:2 }}</h4>
+<h5>80% Put hedge: ${{ lastPrice80|floatformat:2 }}</h5>
+<h5>70% Put hedge: ${{ lastPrice70|floatformat:2 }}</h5>
+<h5>1% Put: ${{ lastPrice1|floatformat:2 }}</h5>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6">
+        <h5>Nearest expiration {{ next_week_expiration }} PUTS</h5>
+        <table class="table table-condensed">
+          <tr>
+            <th>Strike</th>
+            <th>Last Price</th>
+            <th>Bid</th>
+            <th>Ask</th>
+            <th>Volume</th>
+            <th>Open Interest</th>
+            <th>IV</th>
+          </tr>
+          {% for i in chain_puts_next_week.iterrows %}
+
+          {% if i.1.inTheMoney %}
+          <tr style="background: yellowgreen">
+          {% else %}
+          <tr style="background: antiquewhite">
+          {% endif%}
+
+            <td>{{i.1.strike}}</td>
+            <td>{{i.1.lastPrice}}</td>
+            <td>{{i.1.bid}}</td>
+            <td>{{i.1.ask}}</td>
+            <td>{{i.1.volume}}</td>
+            <td>{{i.1.openInterest}}</td>
+            <td>{{i.1.impliedVolatility|floatformat:3}}</td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+      <div class="col-md-6">
+        <h5>Nearest expiration {{ next_week_expiration }} CALLS</h5>
+        <table class="table table-condensed">
+          <tr>
+            <th>Strike</th>
+            <th>Last Price</th>
+            <th>Bid</th>
+            <th>Ask</th>
+            <th>Volume</th>
+            <th>Open Interest</th>
+            <th>IV</th>
+          </tr>
+          {% for i in chain_calls_next_week.iterrows %}
+
+          {% if i.1.inTheMoney %}
+          <tr style="background: yellowgreen">
+          {% else %}
+          <tr style="background: antiquewhite">
+          {% endif%}
+
+            <td>{{i.1.strike}}</td>
+            <td>{{i.1.lastPrice}}</td>
+            <td>{{i.1.bid}}</td>
+            <td>{{i.1.ask}}</td>
+            <td>{{i.1.volume}}</td>
+            <td>{{i.1.openInterest}}</td>
+            <td>{{i.1.impliedVolatility|floatformat:3}}</td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <h5>Expiration 150-- {{ cputs_150mm }} ({{ cputs_150mm_dte }})</h5>
+        <table class="table table-condensed">
+          <tr>
+            <th>Strike</th>
+            <th>Last Price</th>
+            <th>Bid</th>
+            <th>Ask</th>
+            <th>Volume</th>
+            <th>Open Interest</th>
+            <th>IV</th>
+          </tr>
+          {% for i in cputs_150mm_data.iterrows %}
+      
+          {% if i.1.inTheMoney %}
+          <tr style="background: yellowgreen">
+          {% else %}
+          <tr style="background: antiquewhite">
+          {% endif%}
+         
+            <td>{{i.1.strike}}</td>
+            <td>{{i.1.lastPrice}}</td>
+            <td>{{i.1.bid}}</td>
+            <td>{{i.1.ask}}</td>
+            <td>{{i.1.volume}}</td>
+            <td>{{i.1.openInterest}}</td>
+            <td>{{i.1.impliedVolatility|floatformat:3}}</td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+      <div class="col-md-4">
+        <h5>Expiration 150- {{ cputs_150m }} ({{ cputs_150m_dte }})</h5>
+        <table class="table table-condensed">
+          <tr>
+            <th>Strike</th>
+            <th>Last Price</th>
+            <th>Bid</th>
+            <th>Ask</th>
+            <th>Volume</th>
+            <th>Open Interest</th>
+            <th>IV</th>
+          </tr>
+          {% for i in cputs_150m_data.iterrows %}
+      
+          {% if i.1.inTheMoney %}
+          <tr style="background: yellowgreen">
+          {% else %}
+          <tr style="background: antiquewhite">
+          {% endif%}
+         
+            <td>{{i.1.strike}}</td>
+            <td>{{i.1.lastPrice}}</td>
+            <td>{{i.1.bid}}</td>
+            <td>{{i.1.ask}}</td>
+            <td>{{i.1.volume}}</td>
+            <td>{{i.1.openInterest}}</td>
+            <td>{{i.1.impliedVolatility|floatformat:3}}</td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+      <div class="col-md-4">
+        <h5>Expiration 150+ {{ cputs_150p }} ({{ cputs_150p_dte }})</h5>
+        <table class="table table-condensed">
+          <tr>
+            <th>Strike</th>
+            <th>Last Price</th>
+            <th>Bid</th>
+            <th>Ask</th>
+            <th>Volume</th>
+            <th>Open Interest</th>
+            <th>IV</th>
+          </tr>
+          {% for i in cputs_150p_data.iterrows %}
+      
+          {% if i.1.inTheMoney %}
+          <tr style="background: yellowgreen">
+          {% else %}
+          <tr style="background: antiquewhite">
+          {% endif%}
+         
+            <td>{{i.1.strike}}</td>
+            <td>{{i.1.lastPrice}}</td>
+            <td>{{i.1.bid}}</td>
+            <td>{{i.1.ask}}</td>
+            <td>{{i.1.volume}}</td>
+            <td>{{i.1.openInterest}}</td>
+            <td>{{i.1.impliedVolatility|floatformat:3}}</td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+  </div>
+  {% endblock content %}

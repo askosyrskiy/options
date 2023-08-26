@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3>Ticker {{ ticker }}</h3>
+<h4>Expiration {{ date }} ({{dte}}), Last price: ${{ last_price|floatformat:2 }}</h4>
+
+<p></p><a href="/ticker/{{ ticker }}/">Back to the expirations</a></p>
+
+<table class="table table-condensed"> 
+    <tr>
+      <th>Strike</th>
+      <th>Last Price</th>
+      <th>Bid</th>
+      <th>Ask</th>
+      <th>Volume</th>
+      <th>Open Interest</th>
+      <th>IV</th>
+      <th>Break Even %</th>
+      <th>Naked Yield Annual %</th>
+    </tr>
+    {% for i in chain_puts.iterrows %}
+
+    {% if i.1.inTheMoney %}
+    <tr style="background: yellowgreen">
+    {% else %}
+    <tr style="background: antiquewhite">
+    {% endif%}
+   
+      <td>{{i.1.strike}}</td>
+      <td>{{i.1.lastPrice}}</td>
+      <td>{{i.1.bid}}</td>
+      <td>{{i.1.ask}}</td>
+      <td>{{i.1.volume}}</td>
+      <td>{{i.1.openInterest}}</td>
+      <td>{{i.1.impliedVolatility|floatformat:3}}</td>
+      <td>{{i.1.BreakEvenPct|floatformat:2}}</td>
+      <td>{{i.1.NakedYieldAnnPct|floatformat:2}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% endblock content %}

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<ul>
+    {% for i in expirations.iterrows %}
+    <li>
+        <a href="/ticker/{{ticker}}/{{i.1.ExpirationDate}}">{{i.1.ExpirationDate}} ({{i.1.DTE}})</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock content %}
