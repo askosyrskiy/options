@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path
 from . import views
 
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('ticker/', views.index, name='index'),
@@ -25,3 +27,4 @@ urlpatterns = [
     path('ticker/<str:ticker>/<str:date>', views.options, name='options'),
     path('ticker-sw/<str:ticker>/', views.safewheel, name='safewheel'),
 ]
+urlpatterns += staticfiles_urlpatterns()
