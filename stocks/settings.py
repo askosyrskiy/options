@@ -29,6 +29,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'gunbot-mm-alexey.doubleice.us',
     'gunbot.doubleice.us',
+    'options.applikuapp.com'
     '127.0.0.1'
 ]
 
